@@ -94,16 +94,20 @@ class ChambreController extends AbstractController
         ]);
     }
 
+
     #[Route('/admin/room/delete/{id}', name: 'admin_room_delete')]
     public function deleteRoom(DocumentManager $dm, $id): Response
     {
+         // Récupère la chambre à supprimer par son identifiant
         $room = $dm->getRepository(Chambre::class)->find($id);
 
+         // Si la chambre existe, la supprime de la base de données
         if ($room) {
             $dm->remove($room);
             $dm->flush();
         }
 
+        // Redirige vers la liste des chambres
         return $this->redirectToRoute('admin_rooms');
     }
 }
