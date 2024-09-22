@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Réservations{% endblock %}
+
+{% block body %}
+<h1>Mes Réservations</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hôtel</th>
+            <th>Chambres</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.hotel.nom_hotel }}</td>
+                <td>{{ reservation.chambres|length }}</td>
+                <td>{{ reservation.date_debut|date('d/m/Y') }}</td>
+                <td>{{ reservation.date_fin|date('d/m/Y') }}</td>
+                <td>
+                    <a href="{{ path('reservation_show', {'id': reservation.id}) }}">Voir</a>
+                    <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a>
+                    <a href="{{ path('reservation_delete', {'id': reservation.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

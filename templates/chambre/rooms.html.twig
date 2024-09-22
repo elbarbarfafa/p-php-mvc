@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Chambres{% endblock %}
+
+{% block body %}
+<h1>Gestion des Chambres</h1>
+
+<form method="get" action="{{ path('admin_rooms') }}">
+    <input type="text" name="search" value="{{ search }}" placeholder="Rechercher par type">
+    <button type="submit">Rechercher</button>
+</form>
+
+<a href="{{ path('admin_room_new') }}">Ajouter une nouvelle chambre</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Étage</th>
+            <th>Type</th>
+            <th>Nombre de lits</th>
+            <th>Hôtel</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for room in pagination %}
+            <tr>
+                <td>{{ room.etage }}</td>
+                <td>{{ room.type }}</td>
+                <td>{{ room.nombre_lit }}</td>
+                <td>{{ room.hotel.nom_hotel }}</td>
+                <td>
+                    <a href="{{ path('admin_room_edit', {'id': room.code_chambre}) }}">Modifier</a>
+                    <a href="{{ path('admin_room_delete', {'id': room.code_chambre}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

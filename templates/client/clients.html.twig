@@ -1,0 +1,45 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Clients{% endblock %}
+
+{% block body %}
+<h1>Gestion des Clients</h1>
+
+<form method="get" action="{{ path('admin_clients') }}">
+    <input type="text" name="search" value="{{ search }}" placeholder="Rechercher par nom ou email">
+    <button type="submit">Rechercher</button>
+</form>
+
+<a href="{{ path('admin_client_new') }}">Ajouter un nouveau client</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Numéro</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in pagination %}
+            <tr>
+                <td>{{ client.nom_client }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.adresse_client }}</td>
+                <td>{{ client.numero }}</td>
+                <td>
+                    <a href="{{ path('admin_client_edit', {'id': client.code_client}) }}">Modifier</a>
+                    <a href="{{ path('admin_client_delete', {'id': client.code_client}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<h1>Accueil</h1>
+<p>Bienvenue sur notre plateforme de réservation{% if app.user %} {{ app.user.userIdentifier }}{% endif %}.</p>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form.vars.value.id ? 'Modifier' : 'Nouvelle' }} Réservation{% endblock %}
+
+{% block body %}
+<h1>{{ form.vars.value.id ? 'Modifier' : 'Nouvelle' }} Réservation</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+{{ form_end(form) }}
+{% endblock %}

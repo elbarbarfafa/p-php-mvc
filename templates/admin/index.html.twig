@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+<h1>Gestion des hotels</h1>
+<ul>
+    <li><a href="{{ path('admin_hotels') }}">Gestion des Hotels</a></li>
+    <li><a href="{{ path('admin_reservations') }}">Gestion des Réservations</a></li>
+    <li><a href="{{ path('admin_rooms') }}">Gestion des Chambres</a></li>
+    <li><a href="{{ path('admin_clients') }}">Gestion des Clients</a></li>
+</ul>
+{% endblock %}

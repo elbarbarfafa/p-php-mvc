@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Hôtels{% endblock %}
+
+{% block body %}
+<h1>Gestion des Hôtels</h1>
+
+<form method="get" action="{{ path('admin_hotels') }}">
+    <input type="text" name="search" value="{{ search }}" placeholder="Rechercher par nom">
+    <button type="submit">Rechercher</button>
+</form>
+
+<a href="{{ path('admin_hotel_new') }}">Ajouter un nouvel hôtel</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Catégorie</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hotel in pagination %}
+            <tr>
+                <td>{{ hotel.nom_hotel }}</td>
+                <td>{{ hotel.adresse_hotel }}</td>
+                <td>{{ hotel.categorie_hotel }}</td>
+                <td>
+                    <a href="{{ path('admin_hotel_edit', {'id': hotel.code_hotel}) }}">Modifier</a>
+                    <a href="{{ path('admin_hotel_delete', {'id': hotel.code_hotel}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

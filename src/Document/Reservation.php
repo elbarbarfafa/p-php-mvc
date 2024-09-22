@@ -5,19 +5,24 @@ declare(strict_types=1);
 namespace App\Document;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 #[ODM\Document(collection:'reservations')]
 class Reservation {
 
     #[ODM\Id]
-    public ?string $code_hotel = null;
-    #[ODM\Id]
-    public string $code_client;
-    #[ODM\Id]
-    public string $code_chambre;
+    public $id;
+
+    #[ODM\ReferenceOne(targetDocument:Hotel::class)]
+    public $hotel;
+    #[ODM\ReferenceOne(targetDocument:Client::class)]
+    public $client;
+    #[ODM\ReferenceMany(targetDocument: Chambre::class)]
+    public $chambres;
+
+    #[ODM\Field(nullable:true)]
+    public ?string $comment;
+
     #[ODM\Field()]
     public DateTime $date_debut;
 
