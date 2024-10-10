@@ -23,6 +23,7 @@ class UserProvider implements UserProviderInterface
         $user = $this->dm->getRepository(Client::class)->findOneBy(['username' => $username]);
 
         if (!$user) {
+            // L'utilisateur n'existe pas.
             throw new UserNotFoundException(sprintf('User "%s" not found.', $username));
         }
 

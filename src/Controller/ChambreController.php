@@ -12,6 +12,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 class ChambreController extends AbstractController
 {
+    
     #[Route('/admin/rooms', name: 'admin_rooms')]
     public function listRooms(DocumentManager $dm, PaginatorInterface $paginator, Request $request): Response
     {

@@ -14,7 +14,14 @@ use Symfony\Component\HttpFoundation\Request;
 class ClientController extends AbstractController
 {
 
-    
+    /**
+     * Liste des clients avec pagination possible, et possiblement une recherche sur certaines fields
+     *
+     * @param DocumentManager $dm
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/admin/clients', name: 'admin_clients')]
     public function listClients(DocumentManager $dm, PaginatorInterface $paginator, Request $request): Response
     {
@@ -39,6 +46,13 @@ class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Route de création d'un client
+     *
+     * @param Request $request
+     * @param DocumentManager $dm
+     * @return Response
+     */
     #[Route('/admin/client/new', name: 'admin_client_new')]
     public function newClient(Request $request, DocumentManager $dm): Response
     {
